@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import NewEmployeeButton from "./buttonNewEmployee"
 
 
 export default function InformationTable() {
@@ -17,6 +18,7 @@ export default function InformationTable() {
                     <td>1</td>
                     <td>1</td>
                     <td>1</td>
+                    <td></td>
                 </tr>
             </Table>
         </>
@@ -27,6 +29,7 @@ const Table = styled.table`
     width: 100%;
     border: 1px solid black;
     margin-top: 20px;
+    position: relative;
     tr{
         text-align: center;
         height: 80px;
