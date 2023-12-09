@@ -16,6 +16,7 @@ export default function PopUpUpdteEmployee(props) {
     function cancel(e) {
         e.preventDefault()
         setShowUpdatePopUp(false)
+        setDep('')
     }
 
     function handleNameChange(e) {

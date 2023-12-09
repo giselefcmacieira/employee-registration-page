@@ -64,6 +64,7 @@ export default function PopUpNewEmployee(props) {
 
     function cancel(e) {
         e.preventDefault()
+        setDep('')
         setShowNewEmployeePopUp(false)
     }
 
