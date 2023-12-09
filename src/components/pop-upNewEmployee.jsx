@@ -69,7 +69,7 @@ export default function PopUpNewEmployee(props) {
 
     async function createNewEmployee(e) {
         e.preventDefault()
-        if (dateOfBirth.length !== 10) {
+        if (data.length !== 10) {
             return alert('Invalid Date of birth')
         }
         const parts = data.split('/');
