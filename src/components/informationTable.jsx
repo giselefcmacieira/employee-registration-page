@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import NewEmployeeButton from "./buttonNewEmployee"
+import TableRows from "./tableRows"
 
-
-export default function InformationTable() {
+export default function InformationTable(props) {
+    const { employees, setEmployees, employeeToUpdate, setEmployeeToUpdate, showUpdatePopUp, setShowUpdatePopUp, showDeletePopUp, setShowDeletePopUp, employeeToDelete, setEmployeeToDelete } = props
     return (
         <>
             <Table>
@@ -13,13 +13,15 @@ export default function InformationTable() {
                     <th>Data de nascimento</th>
                     <th></th>
                 </MainRow>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td></td>
-                </tr>
+
+                <TableRows
+                    employees={employees} employeeToUpdate={employeeToUpdate}
+                    setEmployeeToUpdate={setEmployeeToUpdate}
+                    showUpdatePopUp={showUpdatePopUp} setShowUpdatePopUp={setShowUpdatePopUp}
+                    employeeToDelete={employeeToDelete} setEmployeeToDelete={setEmployeeToDelete}
+                    showDeletePopUp={showDeletePopUp} setShowDeletePopUp={setShowDeletePopUp}
+                />
+
             </Table>
         </>
     )
@@ -45,6 +47,7 @@ const Table = styled.table`
         text-align: left;
         vertical-align: middle;
         padding:10px;
+        line-height: 25px;
     }
 `
 
@@ -53,7 +56,4 @@ const MainRow = styled.tr`
     border: 1px solid black;
     background-color: gray;
     height: 80px;
-    th:last-child{
-        width: 360px;
-    }
 `

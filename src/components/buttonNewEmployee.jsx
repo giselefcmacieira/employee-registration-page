@@ -1,9 +1,16 @@
 import styled from "styled-components"
 
-export default function NewEmployeeButton() {
+export default function NewEmployeeButton(props) {
+
+    const { showNewEmployeePopUp, setShowNewEmployeePopUp } = props
+
+    function handleClick() {
+        setShowNewEmployeePopUp(!showNewEmployeePopUp)
+    }
+
     return (
         <>
-            <Button>
+            <Button onClick={handleClick}>
                 Novo funcionário
             </Button>
         </>

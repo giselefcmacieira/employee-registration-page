@@ -1,25 +1,52 @@
+import axios from "axios"
+import { useEffect } from "react"
 import styled from "styled-components"
+import Options from "./departmentOptions"
 
-export default function Search() {
+export default function Search(props) {
+
+    const { departments, setDepartments, dep, setDep, name, setName, search, setSearch } = props
+
+    function handleChange(e) {
+        e.preventDefault()
+        setName(e.target.value)
+    }
+
+    function handleClick(e) {
+        e.preventDefault()
+        setSearch(!search)
+    }
+
+    async function getDepartments() {
+        const BASE_URL = import.meta.env.VITE_API_URL
+        const url = `${BASE_URL}/departments`
+        axios.get(url)
+            .then(resp => {
+                console.log(resp.data)
+                setDepartments(resp.data)
+            })
+            .catch(err => {
+                console.log(err.response.data)
+            })
+    }
+
+    useEffect(() => {
+        getDepartments()
+    }, [])
+
     return (
         <>
             <Container>
                 <Form>
                     <label>Nome</label>
                     <input
-                        type="search"
-                        title="Nome"
+                        type="text"
+                        value={name}
+                        onChange={handleChange}
                     />
                 </Form>
-                <Form>
-                    <label>Departamento</label>
-                    <select id="estado" name="estado">
-                        <option value="SP">SP</option>
-                        <option value="RJ">RJ</option>
-                        <option value="PB">PB</option>
-                    </select>
-                </Form>
-                <button>Pesquisar</button>
+                <Options departments={departments} dep={dep} setDep={setDep} def='' />
+                <button onClick={handleClick}>Pesquisar</button>
             </Container>
         </>
     )
@@ -32,6 +59,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     position: relative;
+    padding: 20px;
     button{
         position: absolute;
         right: 20px;
@@ -43,14 +71,14 @@ const Container = styled.div`
     }
 `
 
-const Form = styled.form`
+export const Form = styled.form`
     display: flex;
     align-items: center;
     justify-content: flex-start;
     position: relative;
     width: 30%;
     background-color: red;
-    margin-left: 30px;
+    margin-right: 30px;
     input {
         font-weight: 400;
         line-height: 20px;
