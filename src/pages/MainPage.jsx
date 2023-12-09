@@ -30,7 +30,6 @@ export default function MainPage() {
         if (dep !== '' && name === '') url += `?departmentId=${dep}`
         if (dep === '' && name !== '') url += `?name=${name}`
         if (dep !== '' && name !== '') url += `?name=${name}&departmentId=${dep}`
-        console.log(url)
         axios.get(url)
             .then(resp => {
                 setEmployees(resp.data)

@@ -19,7 +19,7 @@ export default function PopUpDeleteEmployee(props) {
                 setEmployeeDeleted(!employeeDeleted)
             })
             .catch(err => {
-                console.log(err.response.data)
+                alert(err.response.data.message)
             })
     }
     return (
@@ -78,5 +78,6 @@ export const ButtonContainer = styled.div`
         width: 100px;
         margin-left: 40px;
         margin-right: 40px;
+        cursor: pointer;
     }
 `

@@ -38,6 +38,7 @@ const Box = styled.div`
     width: 120px;
     div{
         margin: 0;
+        cursor: pointer;
     }
     p{
         margin: 0;

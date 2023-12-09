@@ -23,4 +23,5 @@ const Button = styled.button`
     background-color: #c0bbbb;
     border: 1px solid black;
     margin-top: 20px;
+    cursor: pointer;
 `

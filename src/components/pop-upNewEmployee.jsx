@@ -11,7 +11,6 @@ export default function PopUpNewEmployee(props) {
     const [cpf, setCpf] = useState('');
     const [salary, setSalary] = useState('R$');
     const [data, setData] = useState('');
-    const initialDep = dep
 
     function handleCPFChange(event) {
         let inputValue = event.target.value.replace(/\D/g, '');
@@ -70,6 +69,9 @@ export default function PopUpNewEmployee(props) {
 
     async function createNewEmployee(e) {
         e.preventDefault()
+        if (dateOfBirth.length !== 10) {
+            return alert('Invalid Date of birth')
+        }
         const parts = data.split('/');
         const BASE_URL = import.meta.env.VITE_API_URL
         const url = `${BASE_URL}/employees`
@@ -82,12 +84,12 @@ export default function PopUpNewEmployee(props) {
         }
         axios.post(url, body)
             .then(resp => {
-                setDep(initialDep)
+                setDep('')
                 setEmployeeAdd(!employeeAdd)
                 setShowNewEmployeePopUp(false)
             })
             .catch(err => {
-                console.log(err.response.data)
+                alert(err.response.data.message)
             })
 
     }
@@ -261,5 +263,6 @@ export const ButtonContainer = styled.div`
         margin-right: 20px;
         padding: 5px;
         width: 100px;
+        cursor: pointer;
     }
 `

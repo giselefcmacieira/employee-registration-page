@@ -12,7 +12,6 @@ export default function PopUpUpdteEmployee(props) {
     const [cpf, setCPF] = useState(formattedCpf)
     const [salary, setSalary] = useState(`R$ ${(employeeToUpdate.salary / 100).toFixed(0)},00`)
     const [dateOfBirth, setDateOfBirth] = useState(dayjs(employeeToUpdate.dateOfBirth).format('DD/MM/YYYY'))
-    const initialDep = dep
 
     function cancel(e) {
         e.preventDefault()
@@ -72,6 +71,9 @@ export default function PopUpUpdteEmployee(props) {
 
     async function updateEmployee(e) {
         e.preventDefault()
+        if (dateOfBirth.length !== 10) {
+            return alert('Invalid Date of birth')
+        }
         const parts = dateOfBirth.split('/');
         const BASE_URL = import.meta.env.VITE_API_URL
         const url = `${BASE_URL}/employees/${employeeToUpdate.id}`
@@ -82,15 +84,15 @@ export default function PopUpUpdteEmployee(props) {
             dateOfBirth: dayjs(`${parts[2]}-${parts[1]}-${parts[0]}`).toISOString(),
             departmentId: dep
         }
+
         axios.put(url, body)
             .then(resp => {
-                setDep(initialDep)
+                setDep('')
                 setEmployeeUpdated(!employeeUpdated)
                 setShowUpdatePopUp(false)
             })
             .catch(err => {
-                console.log(dep)
-                console.log(err.response.data)
+                alert(err.response.data.message)
             })
     }
 

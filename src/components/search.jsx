@@ -22,7 +22,6 @@ export default function Search(props) {
         const url = `${BASE_URL}/departments`
         axios.get(url)
             .then(resp => {
-                console.log(resp.data)
                 setDepartments(resp.data)
             })
             .catch(err => {
@@ -68,6 +67,7 @@ const Container = styled.div`
         width: 120px;
         background-color: #c0bbbb;
         border: 1px solid black;
+        cursor: pointer;
     }
 `
 
